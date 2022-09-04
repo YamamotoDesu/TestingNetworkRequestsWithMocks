@@ -7,12 +7,18 @@
 
 import UIKit
 
+// Extract a URLSession Protocol For Test Doubles
+protocol URLSesionProtocol {
+    func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+}
+
+extension URLSession: URLSesionProtocol { }
 
 class ViewController: UIViewController {
     
     @IBOutlet private(set) var button: UIButton!
     private var dataTask: URLSessionDataTask?
-    var session = URLSession.shared
+    var session: URLSesionProtocol = URLSession.shared // Isolate URLSession with Dependency Injection
     
     override func viewDidLoad() {
         super.viewDidLoad()
