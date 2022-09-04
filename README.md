@@ -24,7 +24,7 @@ class ViewController: UIViewController {
                             "media=ebook&term=\(encodedTerms)") else { return }
         
         let request = URLRequest(url: url)
-        dataTask = session.dataTask(with: request) { [weak self] (data: Data?, response: URLResponse?, error: Error?) -> Void in
+        dataTask = URLSession.shared.dataTask(with: request) { [weak self] (data: Data?, response: URLResponse?, error: Error?) -> Void in
             
             guard let self = self else { return }
             
